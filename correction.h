@@ -8,8 +8,8 @@
 #ifndef CORRECTION_H
 #define CORRECTION_H
 
-#include <gdal/ogr_spatialref.h>
-#include <gdal/gdal_priv.h>
+#include <ogr_spatialref.h>
+#include <gdal_priv.h>
 
 void performCorrection(GDALDataset* input, GDALDataset* output,
                        int inputBand,OGRSpatialReference& geoSrs,double requiredAccuracy, int iterationsLimit);

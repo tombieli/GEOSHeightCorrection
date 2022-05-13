@@ -1,4 +1,4 @@
-#include <gdal/ogr_spatialref.h>
+#include <ogr_spatialref.h>
 #include "MathVector.h"
 #include "MathMatrix.h"
 #include <iostream>

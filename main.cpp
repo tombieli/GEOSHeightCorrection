@@ -9,8 +9,8 @@
 #include <sstream>
 #include <cstring>
 
-#include <gdal/gdal_priv.h>
-#include <gdal/ogr_spatialref.h>
+#include <gdal_priv.h>
+#include <ogr_spatialref.h>
 #include <boost/program_options.hpp>
 #include "correction.h"
 

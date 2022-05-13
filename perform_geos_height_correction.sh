@@ -162,7 +162,7 @@ ${GDAL_MERGE} -separate -o ${IMG_STAGE_1} ${COORDS_IMAGE} $INPUT
 
 BANDS_COUNT=`getBandsCount $INPUT`
 IMG_STAGE_2=${TEMP_DIR}/stage2.csv
-BAND_OPTIONS=`seq $[$BANDS_COUNT + 2] | sed "s#^#-band #"`
+BAND_OPTIONS='-allbands' #`seq $[$BANDS_COUNT + 2] | sed "s#^#-band #"`
 ${GDAL_2_XYZ} ${BAND_OPTIONS} ${IMG_STAGE_1} ${IMG_STAGE_2}
 
 IMG_STAGE_2_1=${TEMP_DIR}/stage2_1.csv

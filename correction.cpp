@@ -246,7 +246,6 @@ void performCorrection(GDALDataset* input, GDALDataset* output,
             
         }
     
-    CPLFree(tranformation);
-    CPLFree(reverseTranformation);
-    
+    OGRCoordinateTransformation::DestroyCT(tranformation);
+    OGRCoordinateTransformation::DestroyCT(reverseTranformation);
 }

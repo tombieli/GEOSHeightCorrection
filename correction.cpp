@@ -151,8 +151,10 @@ static void saveCoordinatesInRaster(GDALDataset* output, int x, int y, double ge
     double coords[] = {geoX, geoY};
     int bands[] = {1,2};
 
-    output->RasterIO(GF_Write, x, y, 1, 1, &coords, 1, 1, GDT_Float64, 2, bands,
-                        0,0,0,nullptr);
+    if(output->RasterIO(GF_Write, x, y, 1, 1, &coords, 1, 1, GDT_Float64, 2, bands,
+                        0,0,0,nullptr) != CE_None) {
+        cerr << "Error while writing pixel "<< x << ", " << y << " to output raster." << endl; 
+    }
 }
 
 void performCorrection(GDALDataset* input, GDALDataset* output, 
@@ -191,8 +193,13 @@ void performCorrection(GDALDataset* input, GDALDataset* output,
         {
             double h;
             auto band = inputBand;
-            input->RasterIO(GF_Read, x, y, 1, 1, &h, 1, 1, GDT_Float64, 1, &band,
-                            0,0,0,nullptr);
+            if(input->RasterIO(GF_Read, x, y, 1, 1, &h, 1, 1, GDT_Float64, 1, &band,
+                            0,0,0,nullptr) != CE_None) {
+                cerr << "Failed to fetch pixel " << x <<","<< y << " from input raster." << endl;
+                saveCoordinatesInRaster(output,x,y,numeric_limits<double>::quiet_NaN(), numeric_limits<double>::quiet_NaN());
+                continue;
+                                
+            }
             auto geoCoords = calcGeoCoordsFromPix(x+0.5,y+0.5,geo);
             
             if(hasNoData && isNoData(h,noData))

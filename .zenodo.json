@@ -1,0 +1,20 @@
+{
+    "title": "Bathymetry Estimator",
+    "creators": [
+      {
+        "name": "Bieliński, Tomasz",
+        "affiliation": "Gdańsk University of Technology",
+        "orcid": "0000-0003-2231-5858"
+      }
+    ],
+    "license": "MIT",
+    "related_identifiers": [
+        {"relation": "isSupplementTo", "identifier":"10.3390/rs12030365"}
+    ],
+    "keywords": [
+      "cloud",
+      "geostationary",
+      "parallax",
+      "satellite"
+    ]
+  }

@@ -61,6 +61,16 @@ getProjSRS()
 	$GDAL_INFO -proj4 $1 | grep -A 1 "PROJ" | tail -1 | tr -d "'"
 }
 
+getXYZAllBandsOption()
+{
+	GV=$[${GDAL_VERSION[0]} * 10 + ${GDAL_VERSION[1]}]
+	if [ "$GV" -ge 33 ]; then
+		echo "-allbands"
+	else
+		seq $1 | sed "s#^#-band #"
+	fi
+}
+
 errcheck()
 {
 	echo $@ >&2
@@ -72,6 +82,8 @@ errcheck()
         fi
 }
 
+GDAL_VERSION=($(gdal-config --version | tr '.' ' '))
+echo "GDAL Version: `echo ${GDAL_VERSION[*]} | tr ' ' '.'`"
 
 H_BAND=1
 ALGORITHMS=()
@@ -162,7 +174,7 @@ ${GDAL_MERGE} -separate -o ${IMG_STAGE_1} ${COORDS_IMAGE} $INPUT
 
 BANDS_COUNT=`getBandsCount $INPUT`
 IMG_STAGE_2=${TEMP_DIR}/stage2.csv
-BAND_OPTIONS='-allbands' #`seq $[$BANDS_COUNT + 2] | sed "s#^#-band #"`
+BAND_OPTIONS=`getXYZAllBandsOption $[$BANDS_COUNT + 2]`
 ${GDAL_2_XYZ} ${BAND_OPTIONS} ${IMG_STAGE_1} ${IMG_STAGE_2}
 
 IMG_STAGE_2_1=${TEMP_DIR}/stage2_1.csv

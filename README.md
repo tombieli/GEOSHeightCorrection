@@ -1,5 +1,7 @@
 # GEOS Height Correction
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6569030.svg)](https://doi.org/10.5281/zenodo.6569030)
+
 ## Introduction
 
 This software is a supplement to the publication "A Parallax Shift Effect Correction Based on Cloud Height for Geostationary Satellites and Radar Observations" *[[1]](#references)*.

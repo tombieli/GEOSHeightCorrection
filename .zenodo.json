@@ -1,5 +1,7 @@
 {
-    "title": "Bathymetry Estimator",
+    "$schema": "https://zenodo.org/schemas/deposits/records/legacyrecord.json",
+    "title": "GEOS Height Correction",
+    "description": "Software for correction of parallax shift caused by clouds on images from geostationary satellites.",
     "creators": [
       {
         "name": "Bieliński, Tomasz",
@@ -9,7 +11,9 @@
     ],
     "license": "MIT",
     "related_identifiers": [
-        {"relation": "isSupplementTo", "identifier":"10.3390/rs12030365"}
+        {"relation": "isSupplementTo", "identifier":"10.3390/rs12030365"},
+        {"relation": "isSupplementTo", "identifier": "https://github.com/tombieli/GEOSHeightCorrection"}
+
     ],
     "keywords": [
       "cloud",

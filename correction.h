@@ -1,8 +1,8 @@
 /* 
  * File:   correction.h
- * Author: tomvtec
+ * Author: tombieli
  *
- * Created on 1 sierpnia 2016, 15:47
+ * Created on 1 August 2016, 15:47
  */
 
 #ifndef CORRECTION_H

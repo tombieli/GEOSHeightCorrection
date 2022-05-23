@@ -1,8 +1,8 @@
 /* 
  * File:   main.cpp
- * Author: tomvtec
+ * Author: tombieli
  *
- * Created on 1 sierpnia 2016, 15:05
+ * Created on 1 August 2016, 15:05
  */
 
 #include <iostream>

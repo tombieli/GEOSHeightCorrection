@@ -1,8 +1,8 @@
 /* 
  * File:   MathVector.h
- * Author: tomvtec
+ * Author: tombieli
  *
- * Created on 6 listopada 2015, 15:19
+ * Created on 6 November 2015, 15:19
  */
 #ifndef MATHVECTOR_H
 #define	MATHVECTOR_H

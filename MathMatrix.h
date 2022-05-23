@@ -1,8 +1,8 @@
 /* 
  * File:   MathMatrix.h
- * Author: tomvtec
+ * Author: tombieli
  *
- * Created on 6 listopada 2015, 15:22
+ * Created on 6 November 2015, 15:22
  */
 
 #ifndef MATHMATRIX_H

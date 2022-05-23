@@ -1,10 +1,12 @@
 # GEOS Height Correction
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6569030.svg)](https://doi.org/10.5281/zenodo.6569030)
+
 ## Introduction
 
 This software is a supplement to the publication "A Parallax Shift Effect Correction Based on Cloud Height for Geostationary Satellites and Radar Observations" *[[1]](#references)*.
 
-This program performs correction of cloud's parallax shift using it's a priori known height. Program is intended to use with raster images in [Geostationary projection](https://proj.org/operations/projections/geos.html) *[[2]](#references)*.
+This program performs correction of cloud's parallax shift using its a priori known height. Program is intended to use with raster images in [Geostationary projection](https://proj.org/operations/projections/geos.html) *[[2]](#references)*.
 
 ### C++ program
 
@@ -18,7 +20,7 @@ C++ program requires following libraries to run:
 
 This repository also contains script `perform_geos_height_correction.sh` which allows to correct existing images in Geostationary Projection using priori known height of clouds. Script produces raster in which data connected with cloud top are moved to relevant nadir location.
 
-To run wrapping script requires above C++ program present in `PATH` and install GDAL *[[4]](#references)* utilities including python scripts.
+To run, wrapping script requires above C++ program present in `PATH` and installed GDAL *[[4]](#references)* utilities including python scripts.
 
 ## Build
 
@@ -61,7 +63,7 @@ This correction software can be used either from docker or directly by operation
 
 #### Docker
 
-For docker usage it assumed that command is preceded by docker prefix:
+For docker usage it is assumed that command is preceded by docker prefix:
 
 Powershell on Windows
 
@@ -141,7 +143,6 @@ Alternatively raster can be corrected with different interpolation algorithm
 ```shell
 perform_geos_height_correction.sh --input data/ctt_201507251300.tif --height data/h_201507251300.tif --output data/ctt_201507251300_corrected_nearest.tif --algorithms "nearest"
 ```
-
 
 ## References
 

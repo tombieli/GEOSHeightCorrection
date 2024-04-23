@@ -13,8 +13,16 @@
 #include <ogr_spatialref.h>
 #include <boost/program_options.hpp>
 #include "correction.h"
+#include "correction_utils.h"
 
 using namespace std;
+
+static const string nmDesc = string() +
+        "Numeric method. Either:\n" +
+        ksg::NM_NETWON_NAME + "\n" +
+        ksg::NM_NETWON_DESC + "\n" +
+        ksg::NM_LEVENBERG_MARQUARD_NAME + "\n" +
+        ksg::NM_LEVENBERG_MARQUARD_DESC + "\n";
 
 boost::program_options::variables_map init(int argc, char ** argv)
 {
@@ -25,7 +33,13 @@ boost::program_options::variables_map init(int argc, char ** argv)
     ("output", boost::program_options::value<std::string>(), "Location of result raster with corrected coordiantes")
     ("height-band",boost::program_options::value<int>()->default_value(1),"Band with height information [m]. ")
     ("requierd-accuracy",boost::program_options::value<double>()->default_value(10),"Required accuracy [m].")
-    ("iterations-limit",boost::program_options::value<int>()->default_value(100),"Maximum number of iteration of netwon method per pixel."); 
+    (
+        "numeric-method", 
+        boost::program_options::value<ksg::NumericMethod>()->default_value(ksg::NumericMethod::LEVENBERG_MARQUARD),
+        nmDesc.c_str()
+    )
+    ("use-squared-target", "Use squared targed function.")
+    ("iterations-limit",boost::program_options::value<int>()->default_value(100),"Maximum number of iteration per pixel.");
 
     auto ret = boost::program_options::variables_map();
 
@@ -90,8 +104,16 @@ int main(int argc, char** argv) {
         
         CopyGeoMetadata(output,input);
         
+        auto corrector = GEOSHeightCorrector(srs);
         
-        performCorrection(input,output,variablesMap["height-band"].as<int>(),srs,variablesMap["requierd-accuracy"].as<double>(),variablesMap["iterations-limit"].as<int>());
+        corrector.calculateNewCoordinatesForRaster(
+            input,output,
+            variablesMap["height-band"].as<int>(),
+            variablesMap["requierd-accuracy"].as<double>(),
+            variablesMap["iterations-limit"].as<int>(),
+            variablesMap["numeric-method"].as<ksg::NumericMethod>(),
+            variablesMap.count("use-squared-target") > 0
+        );
         
     }
     catch(exception &ex)

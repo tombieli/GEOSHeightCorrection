@@ -87,6 +87,8 @@ echo "GDAL Version: `echo ${GDAL_VERSION[*]} | tr ' ' '.'`"
 
 H_BAND=1
 ALGORITHMS=()
+N_METHOD='LEVENBERG_MARQUARD'
+SQUARED_FLAG=''
 while [[ $# > 0 ]];
 do
         case $1 in
@@ -113,6 +115,15 @@ do
 		--algorithms)
 			eval "ALGORITHMS=($2)"
 			shift
+			shift
+		;;
+		--numeric-method)
+			N_METHOD=$2
+			shift
+			shift
+		;;
+		--use-squared-target)
+			SQUARED_FLAG="--use-squared-target"
 			shift
 		;;
 		*)
@@ -167,7 +178,7 @@ $GDAL_MERGE -separate -o $REPR_H_IMAGE $BLANK_IMAGE $BLANK_IMAGE
 $GDAL_WARP -order 1 $H_IMAGE $REPR_H_IMAGE
 
 COORDS_IMAGE=${TEMP_DIR}/coords_image.tif
-$GEOS_HEIGHT_CORRECTION --input $REPR_H_IMAGE --height-band $H_BAND --output $COORDS_IMAGE
+$GEOS_HEIGHT_CORRECTION --input $REPR_H_IMAGE --height-band $H_BAND --output $COORDS_IMAGE --numeric-method $N_METHOD $SQUARED_FLAG
 
 IMG_STAGE_1=${TEMP_DIR}/stage1.tif
 ${GDAL_MERGE} -separate -o ${IMG_STAGE_1} ${COORDS_IMAGE} $INPUT

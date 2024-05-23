@@ -25,7 +25,7 @@ Program `geosheightcorrection` calculates new coordinates  in geostationary view
 
 ### Wrapping script
 
-This repository contains script `perform_geos_height_correction.sh` which allows to correct existing images in Geostationary Projection using priori known height of clouds. Script produces raster in which data connected with cloud top are moved to relevant nadir location.
+This repository contains script `perform_geos_height_correction.sh` which allows to correct existing images in Geostationary Projection using a priori known height of clouds. Script produces raster in which data connected with cloud top are moved to relevant nadir location.
 
 To run, wrapping script requires above C++ program present in `PATH` and installed GDAL [@gdal] utilities including python scripts.
 
@@ -160,6 +160,8 @@ Wrapping script has following options:
 - `--height` - path to image containing cloud height data (in meters),
 - `--output` - location where corrected image will be saved,
 - `--height-band` - number of band containing height information in height raster. If not specified `1` is assumed,
+- `--numeric-method` - numeric method used by `geosheightcorrection` program. If not specified `LEVENBERG_MARQUARD` is used.
+- `--use-squared-target` - if `geosheightcorrection` has to use squared targed function. 
 - `--algorithms` - list of interpolation algorithms for each band respectively. If not defined `average` is assumed for each band. For bands which contain quantified data by definition `nearest` algorithm is suggested. For more information please refer to help of `gdal_grid` program.
 
 To run full correction and resampling of sample data please run following command:
@@ -179,7 +181,7 @@ perform_geos_height_correction.sh --input data/ctt_201507251300.tif --height dat
 ### Table generation program
 
 > [!NOTE]  
-> This program is intended to generate tables in format similar to those that can be found here [@marianne_koenig_parallax]. However due to fact, that original files are broken, the program output cannot be fully verified. One important difference is that this program don't format in numbers in Fortran's fixed digit numbers sheme, rather numbers are always printed with ~4 digit precision and always are separeted by spaces.
+> This program is intended to generate tables in format similar to those that can be found here [@marianne_koenig_parallax]. However due to fact, that original files are broken, the program output cannot be fully verified. One important difference is that this program don't format in numbers in Fortran's fixed digit numbers scheme, rather numbers are always printed with ~4 digit precision and always are separeted by spaces.
 
 Table program run without parameters:
 

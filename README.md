@@ -37,7 +37,7 @@ Eumetcast [\[7\]](#ref-emetsat_mpefa_2011).
 
 This repository contains script `perform_geos_height_correction.sh`
 which allows to correct existing images in Geostationary Projection
-using priori known height of clouds. Script produces raster in which
+using a priori known height of clouds. Script produces raster in which
 data connected with cloud top are moved to relevant nadir location.
 
 To run, wrapping script requires above C++ program present in `PATH` and
@@ -196,6 +196,10 @@ Wrapping script has following options:
 - `--output` - location where corrected image will be saved,
 - `--height-band` - number of band containing height information in
   height raster. If not specified `1` is assumed,
+- `--numeric-method` - numeric method used by `geosheightcorrection`
+  program. If not specified `LEVENBERG_MARQUARD` is used.
+- `--use-squared-target` - if `geosheightcorrection` has to use squared
+  targed function.
 - `--algorithms` - list of interpolation algorithms for each band
   respectively. If not defined `average` is assumed for each band. For
   bands which contain quantified data by definition `nearest` algorithm
@@ -226,7 +230,7 @@ perform_geos_height_correction.sh --input data/ctt_201507251300.tif --height dat
 > that can be found here [\[8\]](#ref-marianne_koenig_parallax). However
 > due to fact, that original files are broken, the program output cannot
 > be fully verified. One important difference is that this program don’t
-> format in numbers in Fortran’s fixed digit numbers sheme, rather
+> format in numbers in Fortran’s fixed digit numbers scheme, rather
 > numbers are always printed with ~4 digit precision and always are
 > separeted by spaces.
 

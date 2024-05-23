@@ -21,7 +21,7 @@ namespace ksg
 
         if(word.compare(NM_NETWON_NAME) == 0) {
             method = NumericMethod::NETWON;
-        } else if(word.compare(NM_LEVENBERG_MARQUARD_NAME)) {
+        } else if(word.compare(NM_LEVENBERG_MARQUARD_NAME) == 0) {
             method = NumericMethod::LEVENBERG_MARQUARD;
         } else {
             throw std::logic_error("Unknown numeric method: \""+word+"\"");
